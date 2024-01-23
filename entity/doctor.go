@@ -4,6 +4,7 @@ import "time"
 
 type Doctor struct {
 	User         *User
+	Clinic       *Clinic
 	Doctor_ID    uint64
 	Clinic_ID    uint64
 	Name         string
