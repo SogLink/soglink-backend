@@ -98,7 +98,7 @@ func (r doctorRepo) List(ctx context.Context, limit, offset uint64, params map[s
 
 	for k, v := range params {
 		switch k {
-		case "doctor_id":
+		case "name":
 			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
 		case "surname":
 			queryBuilder = queryBuilder.Where("surname ILIKE '%'||?||'%'", v)
@@ -144,9 +144,14 @@ func (r doctorRepo) List(ctx context.Context, limit, offset uint64, params map[s
 }
 
 func (r doctorRepo) Create(ctx context.Context, req *entity.Doctor) error {
+
+	if req.User == nil || req.User.ID == 0 {
+		return r.db.Error(fmt.Errorf("invalid User"))
+	}
+
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"doctor_id":    req.Doctor_ID,
+			"doctor_id":    req.User.ID,
 			"clinic_id":    req.Clinic_ID,
 			"name":         req.Name,
 			"surname":      req.Surname,
