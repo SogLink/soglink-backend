@@ -3,6 +3,7 @@ package entity
 import "time"
 
 type Emr struct {
+	ID                 uint64
 	Diagnoses_text     string
 	Prescriptions_text string
 	Doctor_ID          uint64

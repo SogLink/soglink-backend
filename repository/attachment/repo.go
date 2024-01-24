@@ -1,4 +1,4 @@
-package location
+package attachment
 
 import (
 	"context"
@@ -9,41 +9,35 @@ import (
 )
 
 var (
-	tableLocation = "location"
+	tableAttachment = "attachment"
 )
 
-type locationRepo struct {
+type attachmentRepo struct {
 	table string
 	db    *postgres.PostgresDB
 }
 
-func NewLocationRepo(db *postgres.PostgresDB) Repository {
-	return &locationRepo{
-		table: tableLocation,
+func NewAttachmentRepo(db *postgres.PostgresDB) Repository {
+	return &attachmentRepo{
+		table: tableAttachment,
 		db:    db,
 	}
 }
 
-func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entity.Location, error) {
+func (r attachmentRepo) Get(ctx context.Context, params map[string]string) (*entity.Attachment, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
-		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"emr_id",
+		"file_id",
+		"created_at",
 	).From(r.table)
 
 	for k, v := range params {
 		switch k {
-		case "id":
+		case "emr_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "city":
+		case "file_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "region":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "latitude":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "longitude":
+		case "created_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -53,28 +47,24 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
 
-	var location entity.Location
+	var attachment entity.Attachment
 	err = r.db.QueryRow(ctx, query, args...).Scan(
-		&location.ID,
-		&location.City,
-		&location.Region,
-		&location.Latitude,
-		&location.Longitude,
+		&attachment.Emr_ID,
+		&attachment.File_ID,
+		&attachment.CreatedAt,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
 	}
 
-	return &location, nil
+	return &attachment, nil
 }
 
-func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Location, error) {
+func (r attachmentRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Attachment, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
-		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"emr_id",
+		"file_id",
+		"created_at",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -83,8 +73,8 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
+		case "emr_id":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
 
@@ -98,34 +88,30 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 		return nil, r.db.Error(err)
 	}
 
-	var locations []*entity.Location
+	var attachments []*entity.Attachment
 	for rows.Next() {
-		var location entity.Location
+		var attachment entity.Attachment
 		if err := rows.Scan(
-			&location.ID,
-			&location.City,
-			&location.Region,
-			&location.Latitude,
-			&location.Longitude,
+			&attachment.Emr_ID,
+			&attachment.File_ID,
+			&attachment.CreatedAt,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
 
-		locations = append(locations, &location)
+		attachments = append(attachments, &attachment)
 	}
 
-	return locations, nil
+	return attachments, nil
 }
 
-func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
+func (r attachmentRepo) Create(ctx context.Context, req *entity.Attachment) error {
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"id":        req.ID,
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"emr_id":     req.Emr_ID,
+			"file_id":    req.File_ID,
+			"created_at": req.CreatedAt,
 		},
 	)
 
@@ -142,15 +128,13 @@ func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
+func (r attachmentRepo) Update(ctx context.Context, req *entity.Attachment) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"file_id":    req.File_ID,
+			"created_at": req.CreatedAt,
 		},
-	).Where(r.db.Sq.Equal("id", req.ID))
+	).Where(r.db.Sq.Equal("emr_id", req.Emr_ID))
 
 	query, args, err := queryBuilder.ToSql()
 	if err != nil {
@@ -169,11 +153,11 @@ func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Delete(ctx context.Context, params map[string]string) error {
+func (r attachmentRepo) Delete(ctx context.Context, params map[string]string) error {
 	queryBuilder := r.db.Sq.Builder.Delete(r.table)
 	for k, v := range params {
 		switch k {
-		case "id":
+		case "emr_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}

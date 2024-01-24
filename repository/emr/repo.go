@@ -1,4 +1,4 @@
-package location
+package emr
 
 import (
 	"context"
@@ -9,41 +9,47 @@ import (
 )
 
 var (
-	tableLocation = "location"
+	tableEmr = "emr"
 )
 
-type locationRepo struct {
+type emrRepo struct {
 	table string
 	db    *postgres.PostgresDB
 }
 
-func NewLocationRepo(db *postgres.PostgresDB) Repository {
-	return &locationRepo{
-		table: tableLocation,
+func NewEmrRepo(db *postgres.PostgresDB) Repository {
+	return &emrRepo{
+		table: tableEmr,
 		db:    db,
 	}
 }
 
-func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entity.Location, error) {
+func (r emrRepo) Get(ctx context.Context, params map[string]string) (*entity.Emr, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"doctor_id",
+		"patient_id",
+		"diagnoses_text",
+		"prescriptions_text",
+		"created_at",
+		"updated_at",
 	).From(r.table)
 
 	for k, v := range params {
 		switch k {
 		case "id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "city":
+		case "doctor_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "region":
+		case "patient_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "latitude":
+		case "diagnoses_text":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "longitude":
+		case "prescriptions_text":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
+		case "created_at":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
+		case "updated_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -53,28 +59,32 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
 
-	var location entity.Location
+	var emr entity.Emr
 	err = r.db.QueryRow(ctx, query, args...).Scan(
-		&location.ID,
-		&location.City,
-		&location.Region,
-		&location.Latitude,
-		&location.Longitude,
+		&emr.ID,
+		&emr.Doctor_ID,
+		&emr.Patient_ID,
+		&emr.Diagnoses_text,
+		&emr.Prescriptions_text,
+		&emr.CreatedAt,
+		&emr.UpdatedAt,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
 	}
 
-	return &location, nil
+	return &emr, nil
 }
 
-func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Location, error) {
+func (r emrRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Emr, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"doctor_id",
+		"patient_id",
+		"diagnoses_text",
+		"prescriptions_text",
+		"created_at",
+		"updated_at",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -83,8 +93,10 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
+		case "diagnoses_text":
+			queryBuilder = queryBuilder.Where("diagnoses_text ILIKE '%'||?||'%'", v)
+		case "prescriptions_text":
+			queryBuilder = queryBuilder.Where("prescriptions_text ILIKE '%'||?||'%'", v)
 		}
 	}
 
@@ -98,34 +110,38 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 		return nil, r.db.Error(err)
 	}
 
-	var locations []*entity.Location
+	var emrs []*entity.Emr
 	for rows.Next() {
-		var location entity.Location
+		var emr entity.Emr
 		if err := rows.Scan(
-			&location.ID,
-			&location.City,
-			&location.Region,
-			&location.Latitude,
-			&location.Longitude,
+			&emr.ID,
+			&emr.Doctor_ID,
+			&emr.Patient_ID,
+			&emr.Diagnoses_text,
+			&emr.Prescriptions_text,
+			&emr.CreatedAt,
+			&emr.UpdatedAt,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
 
-		locations = append(locations, &location)
+		emrs = append(emrs, &emr)
 	}
 
-	return locations, nil
+	return emrs, nil
 }
 
-func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
+func (r emrRepo) Create(ctx context.Context, req *entity.Emr) error {
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"id":        req.ID,
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"id":                 req.ID,
+			"doctor_id":          req.Doctor_ID,
+			"patient_id":         req.Patient_ID,
+			"diagnoses_text":     req.Diagnoses_text,
+			"prescriptions_text": req.Patient_ID,
+			"created_at":         req.CreatedAt,
+			"updated_at":         req.UpdatedAt,
 		},
 	)
 
@@ -142,13 +158,15 @@ func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
+func (r emrRepo) Update(ctx context.Context, req *entity.Emr) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"doctor_id":          req.Doctor_ID,
+			"patient_id":         req.Patient_ID,
+			"diagnoses_text":     req.Diagnoses_text,
+			"prescriptions_text": req.Patient_ID,
+			"created_at":         req.CreatedAt,
+			"updated_at":         req.UpdatedAt,
 		},
 	).Where(r.db.Sq.Equal("id", req.ID))
 
@@ -169,7 +187,7 @@ func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Delete(ctx context.Context, params map[string]string) error {
+func (r emrRepo) Delete(ctx context.Context, params map[string]string) error {
 	queryBuilder := r.db.Sq.Builder.Delete(r.table)
 	for k, v := range params {
 		switch k {

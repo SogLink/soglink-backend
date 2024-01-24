@@ -1,4 +1,4 @@
-package location
+package file
 
 import (
 	"context"
@@ -9,41 +9,38 @@ import (
 )
 
 var (
-	tableLocation = "location"
+	tableFile = "file"
 )
 
-type locationRepo struct {
+type fileRepo struct {
 	table string
 	db    *postgres.PostgresDB
 }
 
-func NewLocationRepo(db *postgres.PostgresDB) Repository {
-	return &locationRepo{
-		table: tableLocation,
+func NewFileRepo(db *postgres.PostgresDB) Repository {
+	return &fileRepo{
+		table: tableFile,
 		db:    db,
 	}
 }
 
-func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entity.Location, error) {
+func (r fileRepo) Get(ctx context.Context, params map[string]string) (*entity.File, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"guid",
+		"path",
+		"created_at",
 	).From(r.table)
 
 	for k, v := range params {
 		switch k {
 		case "id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "city":
+		case "guid":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "region":
+		case "path":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "latitude":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "longitude":
+		case "created_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -53,28 +50,26 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
 
-	var location entity.Location
+	var file entity.File
 	err = r.db.QueryRow(ctx, query, args...).Scan(
-		&location.ID,
-		&location.City,
-		&location.Region,
-		&location.Latitude,
-		&location.Longitude,
+		&file.ID,
+		&file.GUID,
+		&file.Path,
+		&file.CreatedAt,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
 	}
 
-	return &location, nil
+	return &file, nil
 }
 
-func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Location, error) {
+func (r fileRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.File, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
-		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"guid",
+		"path",
+		"created_at",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -83,8 +78,8 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
+		case "path":
+			queryBuilder = queryBuilder.Where("path ILIKE '%'||?||'%'", v)
 		}
 	}
 
@@ -98,34 +93,32 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 		return nil, r.db.Error(err)
 	}
 
-	var locations []*entity.Location
+	var files []*entity.File
 	for rows.Next() {
-		var location entity.Location
+		var file entity.File
 		if err := rows.Scan(
-			&location.ID,
-			&location.City,
-			&location.Region,
-			&location.Latitude,
-			&location.Longitude,
+			&file.ID,
+			&file.GUID,
+			&file.Path,
+			&file.CreatedAt,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
 
-		locations = append(locations, &location)
+		files = append(files, &file)
 	}
 
-	return locations, nil
+	return files, nil
 }
 
-func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
+func (r fileRepo) Create(ctx context.Context, req *entity.File) error {
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"id":        req.ID,
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"id":         req.ID,
+			"guid":       req.GUID,
+			"path":       req.Path,
+			"created_at": req.CreatedAt,
 		},
 	)
 
@@ -142,13 +135,12 @@ func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
+func (r fileRepo) Update(ctx context.Context, req *entity.File) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"guid":       req.GUID,
+			"path":       req.Path,
+			"created_at": req.CreatedAt,
 		},
 	).Where(r.db.Sq.Equal("id", req.ID))
 
@@ -169,7 +161,7 @@ func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
 	return nil
 }
 
-func (r locationRepo) Delete(ctx context.Context, params map[string]string) error {
+func (r fileRepo) Delete(ctx context.Context, params map[string]string) error {
 	queryBuilder := r.db.Sq.Builder.Delete(r.table)
 	for k, v := range params {
 		switch k {
