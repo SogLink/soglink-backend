@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "clinic"(
-    "id" BIGINT NOT NULL,
+    "id" SERIAL ,
     "guid" UUID NOT NULL,
     "location_id" BIGINT NOT NULL,
     "name" VARCHAR(255) NOT NULL,

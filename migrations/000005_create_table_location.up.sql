@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "location"(
-    "id" BIGINT NOT NULL,
+    "id" SERIAL,
     "city" VARCHAR(255) NOT NULL,
     "region" VARCHAR(255) NOT NULL,
     "latitude" DOUBLE PRECISION NOT NULL,
