@@ -1,4 +1,4 @@
-package patient
+package attachment
 
 import (
 	"context"
@@ -9,44 +9,35 @@ import (
 )
 
 var (
-	tablePatient = "patient"
+	tableAttachment = "attachment"
 )
 
-type patientRepo struct {
+type attachmentRepo struct {
 	table string
 	db    *postgres.PostgresDB
 }
 
-func NewPatientRepo(db *postgres.PostgresDB) Repository {
-	return &patientRepo{
-		table: tablePatient,
+func NewAttachmentRepo(db *postgres.PostgresDB) Repository {
+	return &attachmentRepo{
+		table: tableAttachment,
 		db:    db,
 	}
 }
 
-func (r patientRepo) Get(ctx context.Context, params map[string]string) (*entity.Patient, error) {
+func (r attachmentRepo) Get(ctx context.Context, params map[string]string) (*entity.Attachment, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
-		"patient_id",
-		"name",
-		"surname",
-		"gender",
-		"birthday",
-		"pinfl",
+		"emr_id",
+		"file_id",
+		"created_at",
 	).From(r.table)
 
 	for k, v := range params {
 		switch k {
-		case "patient_id":
+		case "emr_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "name":
+		case "file_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "surname":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "gender":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "birthday":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "pinfl":
+		case "created_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -56,29 +47,24 @@ func (r patientRepo) Get(ctx context.Context, params map[string]string) (*entity
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
 
-	var patient entity.Patient
+	var attachment entity.Attachment
 	err = r.db.QueryRow(ctx, query, args...).Scan(
-		&patient.Patient_ID,
-		&patient.Name,
-		&patient.Surname,
-		&patient.Gender,
-		&patient.Birthday,
-		&patient.Pinfl,
+		&attachment.Emr_ID,
+		&attachment.File_ID,
+		&attachment.CreatedAt,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
 	}
-	return &patient, nil
+
+	return &attachment, nil
 }
 
-func (r patientRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Patient, error) {
+func (r attachmentRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Attachment, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
-		"patient_id",
-		"name",
-		"surname",
-		"gender",
-		"birthday",
-		"pinfl",
+		"emr_id",
+		"file_id",
+		"created_at",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -87,14 +73,8 @@ func (r patientRepo) List(ctx context.Context, limit, offset uint64, params map[
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
-		case "surname":
-			queryBuilder = queryBuilder.Where("surname ILIKE '%'||?||'%'", v)
-		case "gender":
-			queryBuilder = queryBuilder.Where("gender ILIKE '%'||?||'%'", v)
-		case "pinfl":
-			queryBuilder = queryBuilder.Where("pinfl ILIKE '%'||?||'%'", v)
+		case "emr_id":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
 
@@ -108,34 +88,30 @@ func (r patientRepo) List(ctx context.Context, limit, offset uint64, params map[
 		return nil, r.db.Error(err)
 	}
 
-	var patients []*entity.Patient
+	var attachments []*entity.Attachment
 	for rows.Next() {
-		var patient entity.Patient
-		if err := r.db.QueryRow(ctx, query, args...).Scan(
-			&patient.Patient_ID,
-			&patient.Name,
-			&patient.Surname,
-			&patient.Gender,
-			&patient.Birthday,
-			&patient.Pinfl,
+		var attachment entity.Attachment
+		if err := rows.Scan(
+			&attachment.Emr_ID,
+			&attachment.File_ID,
+			&attachment.CreatedAt,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
 
-		patients = append(patients, &patient)
+		attachments = append(attachments, &attachment)
 	}
-	return patients, nil
+
+	return attachments, nil
 }
 
-func (r patientRepo) Create(ctx context.Context, req *entity.Patient) error {
+func (r attachmentRepo) Create(ctx context.Context, req *entity.Attachment) error {
+
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"patient_id": req.User.ID,
-			"name":       req.Name,
-			"surname":    req.Surname,
-			"gender":     req.Gender,
-			"birthday":   req.Birthday,
-			"pinfl":      req.Pinfl,
+			"emr_id":     req.Emr_ID,
+			"file_id":    req.File_ID,
+			"created_at": req.CreatedAt,
 		},
 	)
 
@@ -152,20 +128,13 @@ func (r patientRepo) Create(ctx context.Context, req *entity.Patient) error {
 	return nil
 }
 
-func (r patientRepo) Update(ctx context.Context, req *entity.Patient) error {
-	if req.User == nil || req.User.ID == 0 {
-		return r.db.Error(fmt.Errorf("invalid User"))
-	}
-
+func (r attachmentRepo) Update(ctx context.Context, req *entity.Attachment) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"name":     req.Name,
-			"surname":  req.Surname,
-			"gender":   req.Gender,
-			"birthday": req.Birthday,
-			"pinfl":    req.Pinfl,
+			"file_id":    req.File_ID,
+			"created_at": req.CreatedAt,
 		},
-	).Where(r.db.Sq.Equal("patient_id", req.Patient_ID))
+	).Where(r.db.Sq.Equal("emr_id", req.Emr_ID))
 
 	query, args, err := queryBuilder.ToSql()
 	if err != nil {
@@ -184,12 +153,11 @@ func (r patientRepo) Update(ctx context.Context, req *entity.Patient) error {
 	return nil
 }
 
-func (r patientRepo) Delete(ctx context.Context, params map[string]string) error {
+func (r attachmentRepo) Delete(ctx context.Context, params map[string]string) error {
 	queryBuilder := r.db.Sq.Builder.Delete(r.table)
-
 	for k, v := range params {
 		switch k {
-		case "patient_id":
+		case "emr_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}

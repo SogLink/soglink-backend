@@ -1,4 +1,4 @@
-package doctor
+package emr
 
 import (
 	"context"
@@ -9,50 +9,47 @@ import (
 )
 
 var (
-	tableDoctor = "doctor"
+	tableEmr = "emr"
 )
 
-type doctorRepo struct {
+type emrRepo struct {
 	table string
 	db    *postgres.PostgresDB
 }
 
-func NewDoctorRepo(db *postgres.PostgresDB) Repository {
-	return &doctorRepo{
-		table: tableDoctor,
+func NewEmrRepo(db *postgres.PostgresDB) Repository {
+	return &emrRepo{
+		table: tableEmr,
 		db:    db,
 	}
 }
 
-func (r doctorRepo) Get(ctx context.Context, params map[string]string) (*entity.Doctor, error) {
+func (r emrRepo) Get(ctx context.Context, params map[string]string) (*entity.Emr, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
+		"id",
 		"doctor_id",
-		"clinic_id",
-		"name",
-		"surname",
-		"birthday",
-		"gender",
-		"education",
-		"certificates",
+		"patient_id",
+		"diagnoses_text",
+		"prescriptions_text",
+		"created_at",
+		"updated_at",
 	).From(r.table)
 
 	for k, v := range params {
 		switch k {
+		case "id":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		case "doctor_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "clinic_id":
+		case "patient_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "name":
+		case "diagnoses_text":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "surname":
+		case "prescriptions_text":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "birthday":
+		case "created_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "gender":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "education":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "certificates":
+		case "updated_at":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -62,34 +59,32 @@ func (r doctorRepo) Get(ctx context.Context, params map[string]string) (*entity.
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
 
-	var doctor entity.Doctor
+	var emr entity.Emr
 	err = r.db.QueryRow(ctx, query, args...).Scan(
-		&doctor.Doctor_ID,
-		&doctor.Clinic_ID,
-		&doctor.Name,
-		&doctor.Surname,
-		&doctor.Birthday,
-		&doctor.Gender,
-		&doctor.Education,
-		&doctor.Certificates,
+		&emr.ID,
+		&emr.Doctor_ID,
+		&emr.Patient_ID,
+		&emr.Diagnoses_text,
+		&emr.Prescriptions_text,
+		&emr.CreatedAt,
+		&emr.UpdatedAt,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
 	}
 
-	return &doctor, nil
+	return &emr, nil
 }
 
-func (r doctorRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Doctor, error) {
+func (r emrRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Emr, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
+		"id",
 		"doctor_id",
-		"clinic_id",
-		"name",
-		"surname",
-		"birthday",
-		"gender",
-		"education",
-		"certificates",
+		"patient_id",
+		"diagnoses_text",
+		"prescriptions_text",
+		"created_at",
+		"updated_at",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -98,10 +93,10 @@ func (r doctorRepo) List(ctx context.Context, limit, offset uint64, params map[s
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
-		case "surname":
-			queryBuilder = queryBuilder.Where("surname ILIKE '%'||?||'%'", v)
+		case "diagnoses_text":
+			queryBuilder = queryBuilder.Where("diagnoses_text ILIKE '%'||?||'%'", v)
+		case "prescriptions_text":
+			queryBuilder = queryBuilder.Where("prescriptions_text ILIKE '%'||?||'%'", v)
 		}
 	}
 
@@ -115,43 +110,38 @@ func (r doctorRepo) List(ctx context.Context, limit, offset uint64, params map[s
 		return nil, r.db.Error(err)
 	}
 
-	var doctors []*entity.Doctor
+	var emrs []*entity.Emr
 	for rows.Next() {
-		var doctor entity.Doctor
+		var emr entity.Emr
 		if err := rows.Scan(
-			&doctor.Doctor_ID,
-			&doctor.Clinic_ID,
-			&doctor.Name,
-			&doctor.Surname,
-			&doctor.Birthday,
-			&doctor.Gender,
-			&doctor.Education,
-			&doctor.Certificates,
+			&emr.ID,
+			&emr.Doctor_ID,
+			&emr.Patient_ID,
+			&emr.Diagnoses_text,
+			&emr.Prescriptions_text,
+			&emr.CreatedAt,
+			&emr.UpdatedAt,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
 
-		doctors = append(doctors, &doctor)
+		emrs = append(emrs, &emr)
 	}
 
-	return doctors, nil
+	return emrs, nil
 }
 
-func (r doctorRepo) Create(ctx context.Context, req *entity.Doctor) error {
-	if req.User == nil || req.User.ID == 0 {
-		return r.db.Error(fmt.Errorf("invalid User"))
-	}
+func (r emrRepo) Create(ctx context.Context, req *entity.Emr) error {
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"doctor_id":    req.User.ID,
-			"clinic_id":    req.Clinic.ID,
-			"name":         req.Name,
-			"surname":      req.Surname,
-			"birthday":     req.Birthday,
-			"gender":       req.Gender,
-			"education":    req.Education,
-			"certificates": req.Certificates,
+			"id":                 req.ID,
+			"doctor_id":          req.Doctor_ID,
+			"patient_id":         req.Patient_ID,
+			"diagnoses_text":     req.Diagnoses_text,
+			"prescriptions_text": req.Patient_ID,
+			"created_at":         req.CreatedAt,
+			"updated_at":         req.UpdatedAt,
 		},
 	)
 
@@ -168,18 +158,17 @@ func (r doctorRepo) Create(ctx context.Context, req *entity.Doctor) error {
 	return nil
 }
 
-func (r doctorRepo) Update(ctx context.Context, req *entity.Doctor) error {
+func (r emrRepo) Update(ctx context.Context, req *entity.Emr) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"clinic_id":    req.Clinic_ID,
-			"name":         req.Name,
-			"surname":      req.Surname,
-			"birthday":     req.Birthday,
-			"gender":       req.Gender,
-			"education":    req.Education,
-			"certificates": req.Certificates,
+			"doctor_id":          req.Doctor_ID,
+			"patient_id":         req.Patient_ID,
+			"diagnoses_text":     req.Diagnoses_text,
+			"prescriptions_text": req.Patient_ID,
+			"created_at":         req.CreatedAt,
+			"updated_at":         req.UpdatedAt,
 		},
-	).Where(r.db.Sq.Equal("doctor_id", req.Doctor_ID))
+	).Where(r.db.Sq.Equal("id", req.ID))
 
 	query, args, err := queryBuilder.ToSql()
 	if err != nil {
@@ -198,11 +187,11 @@ func (r doctorRepo) Update(ctx context.Context, req *entity.Doctor) error {
 	return nil
 }
 
-func (r doctorRepo) Delete(ctx context.Context, params map[string]string) error {
+func (r emrRepo) Delete(ctx context.Context, params map[string]string) error {
 	queryBuilder := r.db.Sq.Builder.Delete(r.table)
 	for k, v := range params {
 		switch k {
-		case "doctor_id":
+		case "id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
