@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "appointment"(
-    "id" BIGINT NOT NULL,
+    "id" SERIAL,
     "guid" UUID NOT NULL,
     "doctor_id" BIGINT NOT NULL,
     "patient_id" BIGINT NOT NULL,

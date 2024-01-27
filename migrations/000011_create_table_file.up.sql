@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "file"(
-    "id" BIGINT NOT NULL,
+    "id" SERIAL,
     "guid" UUID NOT NULL,
     "path" TEXT NOT NULL,
     "created_at" TIMESTAMP(0) WITH TIME zone NOT NULL DEFAULT CURRENT_TIMESTAMP

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "emr"(
-    "id" BIGINT NOT NULL,
+    "id" SERIAL,
     "doctor_id" BIGINT NOT NULL,
     "patient_id" BIGINT NOT NULL,
     "diagnoses_text" TEXT NOT NULL,

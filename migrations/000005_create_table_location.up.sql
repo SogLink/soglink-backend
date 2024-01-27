@@ -1,9 +1,7 @@
 CREATE TABLE IF NOT EXISTS "location"(
     "id" SERIAL,
     "city" VARCHAR(255) NOT NULL,
-    "region" VARCHAR(255) NOT NULL,
-    "latitude" DOUBLE PRECISION NOT NULL,
-    "longitude" DOUBLE PRECISION NOT NULL
+    "region" VARCHAR(255) NOT NULL
 );
 ALTER TABLE "location" ADD PRIMARY KEY("id");
 
