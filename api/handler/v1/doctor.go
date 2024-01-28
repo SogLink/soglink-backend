@@ -50,7 +50,7 @@ func NewDoctorHandler(option handler.HandlerArguments) http.Handler {
 // @Router /v1/doctor [GET]
 // @Summary Get one dentist
 // @Description Get one dentist by ID
-// @Tags dentists
+// @Tags doctor
 // @Accept json
 // @Produce json
 // @Param limit path int false "limit"
@@ -71,10 +71,10 @@ func (h doctorHandler) GetDoctorList() http.HandlerFunc {
 // @Router /v1/doctor/specialty [GET]
 // @Summary Get doctor specialty
 // @Description Get  doctor specialty
-// @Tags dentists
+// @Tags doctor
 // @Accept json
 // @Produce json
-// @Success 200 {object} models.GetSpecialty
+// @Success 200 {object} []models.GetSpecialty
 // @Failure 404 {object} models.ResponseError
 // @Failure 500 {object} models.ResponseError
 func (h doctorHandler) GetDoctor() http.HandlerFunc {

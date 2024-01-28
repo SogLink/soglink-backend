@@ -338,3 +338,8 @@ main.main.func1
 2024-01-28T12:40:24.414+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
 main.main.func1
 	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T13:20:16.635+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T13:20:52.844+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T13:20:52.845+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31

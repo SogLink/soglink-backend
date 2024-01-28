@@ -1,6 +1,28 @@
 definitions:
   models.Empty:
     type: object
+  models.GetDoctorListResponse:
+    properties:
+      'certificate:':
+        type: string
+      clinic_name:
+        type: string
+      education:
+        type: string
+      name:
+        type: string
+      specialty_name:
+        type: string
+      surname:
+        type: string
+    type: object
+  models.GetSpecialty:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
   models.LoginRequest:
     properties:
       email:
@@ -133,6 +155,82 @@ paths:
             $ref: '#/definitions/models.ResponseError'
       tags:
       - Auth
+  /v1/doctor:
+    get:
+      consumes:
+      - application/json
+      description: Get one dentist by ID
+      parameters:
+      - description: limit
+        in: path
+        name: limit
+        type: integer
+      - description: page
+        in: path
+        name: page
+        type: integer
+      - description: specialty
+        in: path
+        name: specialty
+        required: true
+        type: string
+      - description: doctor_name
+        in: path
+        name: doctor_name
+        required: true
+        type: string
+      - description: clinic_id
+        in: path
+        name: clinic_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetDoctorListResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - ApiKeyAuth: []
+      summary: Get one dentist
+      tags:
+      - doctor
+  /v1/doctor/specialty:
+    get:
+      consumes:
+      - application/json
+      description: Get  doctor specialty
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.GetSpecialty'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - ApiKeyAuth: []
+      summary: Get doctor specialty
+      tags:
+      - doctor
 securityDefinitions:
   ApiKeyAuth:
     in: header
