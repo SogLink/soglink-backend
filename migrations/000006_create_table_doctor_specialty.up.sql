@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "doctor_specialty"(
     "doctor_id" BIGINT NOT NULL,
-    "specialty" VARCHAR(255) NOT NULL,
+    "specialty_id" BIGINT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "created_at" TIMESTAMP(0) WITH TIME zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(0) WITH TIME zone NOT NULL DEFAULT CURRENT_TIMESTAMP

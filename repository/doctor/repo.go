@@ -42,18 +42,6 @@ func (r doctorRepo) Get(ctx context.Context, params map[string]string) (*entity.
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		case "clinic_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "name":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "surname":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "birthday":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "gender":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "education":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "certificates":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
 
@@ -145,7 +133,7 @@ func (r doctorRepo) Create(ctx context.Context, req *entity.Doctor) error {
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
 			"doctor_id":    req.User.ID,
-			"clinic_id":    req.Clinic.ID,
+			"clinic_id":    req.Clinic_ID,
 			"name":         req.Name,
 			"surname":      req.Surname,
 			"birthday":     req.Birthday,

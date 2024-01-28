@@ -7,6 +7,8 @@ type Clinic struct {
 	GUID        string
 	Location_ID uint64
 	Name        string
+	Latitude    float64
+	Longitude   float64
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

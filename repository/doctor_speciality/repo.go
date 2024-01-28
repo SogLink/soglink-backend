@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	tableDoctorspeciality = "doctor_specialty"
+	tableDoctorSpecialty = "doctor_specialty"
 )
 
 type doctor_specialtyRepo struct {
@@ -19,7 +19,7 @@ type doctor_specialtyRepo struct {
 
 func NewDoctor_specialtyRepo(db *postgres.PostgresDB) Repository {
 	return &doctor_specialtyRepo{
-		table: tableDoctorspeciality,
+		table: tableDoctorSpecialty,
 		db:    db,
 	}
 }
@@ -27,7 +27,7 @@ func NewDoctor_specialtyRepo(db *postgres.PostgresDB) Repository {
 func (r doctor_specialtyRepo) Get(ctx context.Context, params map[string]string) (*entity.Doctor_specialty, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"doctor_id",
-		"specialty",
+		"specialty_id",
 		"price",
 		"created_at",
 		"updated_at",
@@ -37,13 +37,7 @@ func (r doctor_specialtyRepo) Get(ctx context.Context, params map[string]string)
 		switch k {
 		case "doctor_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "specialty":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "price":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "created_at":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "updated_at":
+		case "specialty_id":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -56,7 +50,7 @@ func (r doctor_specialtyRepo) Get(ctx context.Context, params map[string]string)
 	var doctor_specialty entity.Doctor_specialty
 	err = r.db.QueryRow(ctx, query, args...).Scan(
 		&doctor_specialty.DoctorID,
-		&doctor_specialty.Specialty,
+		&doctor_specialty.SpecialtyID,
 		&doctor_specialty.Price,
 		&doctor_specialty.CreatedAt,
 		&doctor_specialty.UpdatedAt,
@@ -71,7 +65,7 @@ func (r doctor_specialtyRepo) Get(ctx context.Context, params map[string]string)
 func (r doctor_specialtyRepo) List(ctx context.Context, limit, offset uint64, params map[string]string) ([]*entity.Doctor_specialty, error) {
 	queryBuilder := r.db.Sq.Builder.Select(
 		"doctor_id",
-		"specialty",
+		"specialty_id",
 		"price",
 		"created_at",
 		"updated_at",
@@ -83,8 +77,8 @@ func (r doctor_specialtyRepo) List(ctx context.Context, limit, offset uint64, pa
 
 	for k, v := range params {
 		switch k {
-		case "specialty":
-			queryBuilder = queryBuilder.Where("specialty ILIKE '%'||?||'%'", v)
+		case "specialty_id":
+			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
 
@@ -103,7 +97,7 @@ func (r doctor_specialtyRepo) List(ctx context.Context, limit, offset uint64, pa
 		var doctor_specialty entity.Doctor_specialty
 		if err := rows.Scan(
 			&doctor_specialty.DoctorID,
-			&doctor_specialty.Specialty,
+			&doctor_specialty.SpecialtyID,
 			&doctor_specialty.Price,
 			&doctor_specialty.CreatedAt,
 			&doctor_specialty.UpdatedAt,
@@ -121,11 +115,11 @@ func (r doctor_specialtyRepo) Create(ctx context.Context, req *entity.Doctor_spe
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"doctor_id":  req.DoctorID,
-			"specialty":  req.Specialty,
-			"price":      req.Price,
-			"created_at": req.CreatedAt,
-			"updated_at": req.UpdatedAt,
+			"doctor_id":    req.DoctorID,
+			"specialty_id": req.SpecialtyID,
+			"price":        req.Price,
+			"created_at":   req.CreatedAt,
+			"updated_at":   req.UpdatedAt,
 		},
 	)
 
@@ -145,10 +139,10 @@ func (r doctor_specialtyRepo) Create(ctx context.Context, req *entity.Doctor_spe
 func (r doctor_specialtyRepo) Update(ctx context.Context, req *entity.Doctor_specialty) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"specialty":  req.Specialty,
-			"price":      req.Price,
-			"created_at": req.CreatedAt,
-			"updated_at": req.UpdatedAt,
+			"specialty_id": req.SpecialtyID,
+			"price":        req.Price,
+			"created_at":   req.CreatedAt,
+			"updated_at":   req.UpdatedAt,
 		},
 	).Where(r.db.Sq.Equal("doctor_id", req.DoctorID))
 

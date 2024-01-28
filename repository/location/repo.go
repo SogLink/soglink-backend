@@ -28,9 +28,7 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
 		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"state",
 	).From(r.table)
 
 	for k, v := range params {
@@ -39,11 +37,7 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		case "city":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "region":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "latitude":
-			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
-		case "longitude":
+		case "state":
 			queryBuilder = queryBuilder.Where(r.db.Sq.Equal(k, v))
 		}
 	}
@@ -57,9 +51,7 @@ func (r locationRepo) Get(ctx context.Context, params map[string]string) (*entit
 	err = r.db.QueryRow(ctx, query, args...).Scan(
 		&location.ID,
 		&location.City,
-		&location.Region,
-		&location.Latitude,
-		&location.Longitude,
+		&location.State,
 	)
 	if err != nil {
 		return nil, r.db.Error(err)
@@ -72,9 +64,7 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 	queryBuilder := r.db.Sq.Builder.Select(
 		"id",
 		"city",
-		"region",
-		"latitude",
-		"longitude",
+		"state",
 	).From(r.table).OrderBy("created_at asc")
 
 	if limit != 0 {
@@ -83,8 +73,10 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 
 	for k, v := range params {
 		switch k {
-		case "name":
-			queryBuilder = queryBuilder.Where("name ILIKE '%'||?||'%'", v)
+		case "city":
+			queryBuilder = queryBuilder.Where("city ILIKE '%'||?||'%'", v)
+		case "state":
+			queryBuilder = queryBuilder.Where("state ILIKE '%'||?||'%'", v)
 		}
 	}
 
@@ -104,9 +96,7 @@ func (r locationRepo) List(ctx context.Context, limit, offset uint64, params map
 		if err := rows.Scan(
 			&location.ID,
 			&location.City,
-			&location.Region,
-			&location.Latitude,
-			&location.Longitude,
+			&location.State,
 		); err != nil {
 			return nil, r.db.Error(err)
 		}
@@ -121,11 +111,9 @@ func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
 
 	queryBuilder := r.db.Sq.Builder.Insert(r.table).SetMap(
 		map[string]interface{}{
-			"id":        req.ID,
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"id":    req.ID,
+			"city":  req.City,
+			"state": req.State,
 		},
 	)
 
@@ -145,10 +133,8 @@ func (r locationRepo) Create(ctx context.Context, req *entity.Location) error {
 func (r locationRepo) Update(ctx context.Context, req *entity.Location) error {
 	queryBuilder := r.db.Sq.Builder.Update(r.table).SetMap(
 		map[string]interface{}{
-			"city":      req.City,
-			"region":    req.Region,
-			"latitude":  req.Latitude,
-			"longitude": req.Longitude,
+			"city":   req.City,
+			"region": req.State,
 		},
 	).Where(r.db.Sq.Equal("id", req.ID))
 
