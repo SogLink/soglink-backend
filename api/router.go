@@ -4,19 +4,25 @@ import (
 	"net/http"
 
 	httpSwagger "github.com/swaggo/http-swagger"
+	"go.uber.org/zap"
 
-	// _ "github.com/SogLink/soglink-backend/api/docs"
-	// "github.com/SogLink/soglink-backend/api/handlers"
-	// v1 "github.com/SogLink/soglink-backend/api/handlers/v1"
-	// "github.com/AsaHero/abclinic/api/middleware"
+	_ "github.com/SogLink/soglink-backend/api/docs"
+	"github.com/SogLink/soglink-backend/api/handler"
+	v1 "github.com/SogLink/soglink-backend/api/handler/v1"
+	"github.com/SogLink/soglink-backend/api/middleware"
 	"github.com/SogLink/soglink-backend/pkg/config"
+	usecase "github.com/SogLink/soglink-backend/services"
 	"github.com/go-chi/chi/v5"
 	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 )
 
 type RouteArguments struct {
-	Config *config.Config
+	ReshreshTokenUsecase usecase.RefreshToken
+	UserUsecase          usecase.User
+	PatientUsecase       usecase.Patient
+	Logger               *zap.Logger
+	Config               *config.Config
 }
 
 // NewRoute
@@ -24,9 +30,13 @@ type RouteArguments struct {
 // @in header
 // @name Authorization
 func NewRouter(args RouteArguments) http.Handler {
-	// handlersArgs := handlers.HandlerArguments{
-	// 	Config: args.Config,
-	// }
+	handlersArgs := handler.HandlerArguments{
+		Config:               args.Config,
+		ReshreshTokenUsecase: args.ReshreshTokenUsecase,
+		UserUsecase:          args.UserUsecase,
+		Logger:               args.Logger,
+		PatientUsecase:       args.PatientUsecase,
+	}
 
 	router := chi.NewRouter()
 	router.Use(chimiddleware.RealIP, chimiddleware.Logger, chimiddleware.Recoverer)
@@ -40,6 +50,16 @@ func NewRouter(args RouteArguments) http.Handler {
 	}))
 
 	router.Route("/v1", func(r chi.Router) {
+		// protected group api
+		r.Group(func(r chi.Router) {
+			r.Use(middleware.AuthContext(args.Config.Token.Secret))
+		})
+
+		// public group api
+		r.Group(func(r chi.Router) {
+			r.Mount("/auth", v1.NewAuthHandler(handlersArgs))
+			r.Mount("/doctor", v1.NewDoctorHandler(handlersArgs))
+		})
 	})
 
 	// declare swagger api route

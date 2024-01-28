@@ -1,0 +1,340 @@
+2024-01-28T11:18:25.547+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T11:18:32.785+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T11:18:32.785+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T11:32:44.199+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T11:55:03.693+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T11:55:03.694+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:04:23.097+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:05:21.080+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:05:21.081+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:07:31.626+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:08:22.262+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:08:22.263+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:08:31.075+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:08:48.857+0500	ERROR	v1/auth.go:77	error on Login/ rbacUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.NewAuthHandler.func1.authHandler.SignUp.func3
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler-fm.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.init.0.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:11:56.326+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:11:56.326+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:11:59.607+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:12:03.345+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.NewAuthHandler.func1.authHandler.SignUp.func3
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler-fm.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.init.0.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:17:18.126+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:17:18.127+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:23:06.484+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:23:13.723+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.NewAuthHandler.func1.authHandler.SignUp.func3
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler-fm.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.init.0.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:26:07.090+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:26:07.091+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:26:10.004+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:26:11.842+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.NewAuthHandler.func1.authHandler.SignUp.func3
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler-fm.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.init.0.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:28:13.529+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:28:13.530+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:28:17.451+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:29:00.396+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:29:00.397+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:29:04.202+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:29:38.507+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:29:38.508+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:29:41.089+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:29:42.943+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: relation \"soglink.user\" does not exist (SQLSTATE 42P01)"}
+github.com/SogLink/soglink-backend/api/handler/v1.NewAuthHandler.func1.authHandler.SignUp.func3
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler-fm.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.init.0.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:29:59.237+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:29:59.237+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:30:09.898+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:31:57.770+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:31:57.771+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31
+2024-01-28T12:32:20.578+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:40:24.413+0500	INFO	cmd/main.go:41	soglink sevrver stops
+2024-01-28T12:40:24.414+0500	ERROR	cmd/main.go:31	error while running server	{"error": "http: Server closed"}
+main.main.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/cmd/main.go:31

@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	tableUser = "user"
+	tableUser = "users"
 )
 
 type userRepo struct {
@@ -55,6 +55,8 @@ func (r userRepo) Get(ctx context.Context, params map[string]string) (*entity.Us
 	if err != nil {
 		return nil, r.db.ErrSQLBuild(err, r.table+" Get")
 	}
+
+	fmt.Println(query, args)
 
 	var user entity.User
 	err = r.db.QueryRow(ctx, query, args...).Scan(

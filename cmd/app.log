@@ -1,0 +1,166 @@
+2024-01-28T12:19:24.400+0500	INFO	cmd/main.go:29	Listen:	{"address": ":8080"}
+2024-01-28T12:21:14.049+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "context deadline exceeded"}
+github.com/SogLink/soglink-backend/api/handler/v1.authHandler.SignUp.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:21:56.294+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.authHandler.SignUp.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
+2024-01-28T12:22:01.298+0500	ERROR	v1/auth.go:77	error on Login/ userUsecase.UsernameExists	{"error": "ERROR: column \"id\" does not exist (SQLSTATE 42703)"}
+github.com/SogLink/soglink-backend/api/handler/v1.authHandler.SignUp.func1
+	/home/asad/go/src/github.com/SogLink/soglink-backend/api/handler/v1/auth.go:77
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*ChainHandler).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/chain.go:31
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:73
+github.com/go-chi/chi/v5.(*Mux).Mount.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:315
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).routeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:443
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/cors.(*Cors).Handler.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/cors@v1.2.1/cors.go:228
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.Recoverer.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/recoverer.go:45
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RequestLogger.func1.1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/logger.go:55
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5/middleware.RealIP.func1
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/middleware/realip.go:36
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2136
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+	/home/asad/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.11/mux.go:90
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2938
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2009
